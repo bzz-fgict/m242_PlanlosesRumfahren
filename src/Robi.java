@@ -41,7 +41,7 @@ public class Robi {
                 case RobiFaehrtVorwaerts : {
                     robi.getDistSensorValues();
                     if (anWand()) {
-                        bodenSensorWerteAusgeben();
+                        sensorWerteAusgeben();
                         robi.drive(-10);
                         uhr.starten(1000);
                         zustand = RobiFaehrtRueckwaerts;
@@ -86,7 +86,7 @@ public class Robi {
         return false;
     }
 
-    private void bodenSensorWerteAusgeben() {
+    private void sensorWerteAusgeben() {
         for (int i = 2; i < 16; i++) {
             System.out.print(robi.readSensor(i) + " ");
         }
