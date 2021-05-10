@@ -5,10 +5,8 @@ public class Robi {
 
     // Used to start the Robi
     public static void main(String[] args) {
-        Robi r = new Robi("localhost",62687);   // Tragen Sie hier die Portnummer auf Ihrem Simulator ein.
+        Robi r = new Robi("localhost",58950);   // Tragen Sie hier die Portnummer auf Ihrem Simulator ein.
         r.planlosFahren(10);
-
-
     }
 
     public Robi(String hostname, int portNummer) {
@@ -40,7 +38,7 @@ public class Robi {
 
         while (anzahlWandberuehrungen < maxWandberuehrungen) {
             switch (zustand) {
-                case RobiFaehrtVorwaerts -> {
+                case RobiFaehrtVorwaerts : {
                     robi.getDistSensorValues();
                     if (anWand()) {
                         bodenSensorWerteAusgeben();
@@ -49,22 +47,26 @@ public class Robi {
                         zustand = RobiFaehrtRueckwaerts;
                         System.out.println("Robi faehrt rueckwaerts");
                     }
+                    break;
+
                 }
-                case RobiFaehrtRueckwaerts -> {
+                case RobiFaehrtRueckwaerts : {
                     if (uhr.abgelaufen()) {
                         robi.turn(20);
                         uhr.starten(2000);
                         zustand = RobiDrehtAb;
                         System.out.println("Robi dreht ab");
                     }
+                    break;
                 }
-                case RobiDrehtAb -> {
+                case RobiDrehtAb : {
                     if (uhr.abgelaufen()) {
                         anzahlWandberuehrungen++;
                         robi.drive(5);
                         zustand = RobiFaehrtVorwaerts;
                         System.out.println("Robi faehrt vorwaerts");
                     }
+                    break;
                 }
             }
         }
